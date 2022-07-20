@@ -11,7 +11,7 @@ Note that you'll find some API specifications in <code>static/swagger.json</code
 
 # Testing the app
 
-To run the test you can type <code>pytest -v</code> from within the <code>tests</code> directory
+To run the tests you can type <code>pytest -v</code> from within the <code>tests</code> directory
 
 
 <br>
