@@ -1,73 +1,105 @@
 {
-    "openapi": "3.0.0",
-    "info": {
-        "description": "alex_exalt",
-        "version": "1.0.0",
-        "title": "rpn_flask",
-        "contact": {
-            "email": "alex@financial-portfolio.io"
-        }
-    },
-    "components": {
-      "schemas": {
-        "stack_id": {
-          "type":"int"
-        },
-        "operand": {
-          "type":"str"
-        }
+  "openapi": "3.0.0",
+  "info": {
+      "description": "alex_exalt",
+      "version": "1.0.0",
+      "title": "rpn_flask",
+      "contact": {
+          "email": "alex@financial-portfolio.io"
       }
-    },
-    "servers": [
+  },
+  "components": {
+    "schemas": {
+      "stack_id": {
+        "type":"int"
+      },
+      "operand": {
+        "type":"str"
+      }
+    }
+  },
+  "servers": [
+    {
+      "url": "/"
+    }
+  ],
+  "tags": [
       {
-        "url": "/"
+        "name": "RPN Calculator",
+        "description": "API providing an RPN calculator through a Server(Flask)-Client architecture"
       }
     ],
-    "tags": [
+  "paths": {
+  "/rpn/op": {
+      "get": {
+        "tags": [
+          "List_operators"
+        ],
+        "summary": "Lists all the available operators",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+  },
+  "/rpn/stack": {
+      "post": {
+        "tags": [
+          "Create_stack"
+        ],
+        "summary": "Create a stack",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "get": {
+          "tags": [
+            "List_stacks"
+          ],
+          "summary": "List all the stacks",
+          "responses": {
+            "200": {
+              "description": "OK"
+            }
+          }
+        }  
+  },
+  "/rpn/stack/{stack_id}/val/{val}": {
+    "parameters": [
         {
-          "name": "RPN Calculator",
-          "description": "API providing an RPN calculator through a Server(Flask)-Client architecture"
-        }
-      ],
-    "paths": {
-    "/rpn/op": {
-        "get": {
-          "tags": [
-            "List_operators"
-          ],
-          "summary": "Lists all the available operators",
-          "responses": {
-            "200": {
-              "description": "OK"
-            }
-          }
-        }
-    },
-    "/rpn/stack": {
-        "post": {
-          "tags": [
-            "Create_stack"
-          ],
-          "summary": "Create a stack",
-          "responses": {
-            "200": {
-              "description": "OK"
-            }
-          }
+          "name": "stack_id",
+          "in": "path",
+          "required": true,
+          "description": "unique identifier of the stack",
+          "type": "int"
         },
-        "get": {
-            "tags": [
-              "List_stacks"
-            ],
-            "summary": "List all the stacks",
-            "responses": {
-              "200": {
-                "description": "OK"
-              }
-            }
-          }  
-    },
-    "/rpn/stack/{stack_id}/val/{val}": {
+        {
+          "name": "val",
+          "in": "path",
+          "required": true,
+          "description": "unique identifier of the stack",
+          "type": "int"
+        }
+    ],
+  "post": {
+    "tags": [
+      "Push_to_stack"
+    ],
+    "summary": "Push a new value to a stack",
+    "responses": {
+      "201": {
+        "description": "OK"
+      },
+      "404": {
+        "description": "Stack ID not found"
+      }
+    }
+  }
+ },
+  "/rpn/stack/{stack_id}": {
       "parameters": [
           {
             "name": "stack_id",
@@ -75,88 +107,84 @@
             "required": true,
             "description": "unique identifier of the stack",
             "type": "int"
-          },
-          {
-            "name": "val",
+          }
+      ],
+      "get": {
+        "tags": [
+          "Get_stack"
+        ],
+        "summary": "Gets a stack",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+          "tags": [
+            "Delete_stack"
+          ],
+          "summary": "Delete a stack",
+          "responses": {
+            "204": {
+              "description": "OK"
+            },
+            "404": {
+              "description": "Stack ID not found"
+            }
+          }
+        }
+  },
+  "/rpn/op/{op}/stack/{stack_id}": {
+      "parameters": [
+        {
+            "name": "stack_id",
             "in": "path",
             "required": true,
             "description": "unique identifier of the stack",
             "type": "int"
+          },
+          {
+            "name": "op",
+            "in": "path",
+            "required": true,
+            "description": "operation symbols ('+','-','*','d')",
+            "type": "string"
           }
       ],
-    "post": {
+      "post": {
+        "tags": [
+          "Apply_operator"
+        ],
+        "summary": "Apply an operand to a stack",
+        "responses": {
+          "201": {
+            "description": "OK"
+          }
+        }
+      }
+  },
+  "/rpn/clear_stack/{stack_id}": {
+    "parameters": [
+      {
+          "name": "stack_id",
+          "in": "path",
+          "required": true,
+          "description": "unique identifier of the stack",
+          "type": "int"
+        }
+    ],
+    "delete": {
       "tags": [
-        "Push_to_stack"
+        "Clear_stack"
       ],
-      "summary": "Push a new value to a stack",
+      "summary": "Clears a stack, given an ID",
       "responses": {
-        "200": {
+        "204": {
           "description": "OK"
         }
       }
     }
-   },
-    "/rpn/stack/{stack_id}": {
-        "parameters": [
-            {
-              "name": "stack_id",
-              "in": "path",
-              "required": true,
-              "description": "unique identifier of the stack",
-              "type": "int"
-            }
-        ],
-        "get": {
-          "tags": [
-            "Get_stack"
-          ],
-          "summary": "Gets a stack",
-          "responses": {
-            "200": {
-              "description": "OK"
-            }
-          }
-        },
-        "delete": {
-            "tags": [
-              "Delete_stack"
-            ],
-            "summary": "Delete a stack",
-            "responses": {
-              "200": {
-                "description": "OK"
-              }
-            }
-          }
-    },
-    "/rpn/op/{op}/stack/{stack_id}": {
-        "parameters": [
-          {
-              "name": "stack_id",
-              "in": "path",
-              "required": true,
-              "description": "unique identifier of the stack",
-              "type": "int"
-            },
-            {
-              "name": "op",
-              "in": "path",
-              "required": true,
-              "description": "operation symbols ('+','-','*','/')",
-              "type": "string"
-            }
-        ],
-        "post": {
-          "tags": [
-            "Apply_operand"
-          ],
-          "summary": "Apply an operand to a stack",
-          "responses": {
-            "200": {
-              "description": "OK"
-            }
-          }
-        }
-    }
+}
 }
 }

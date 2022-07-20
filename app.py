@@ -160,8 +160,9 @@ def delete_stack(stack_id):
 @app.route("/rpn/op/<string:operator>/stack/<int:stack_id>", methods=['POST'])
 def apply_operator(operator, stack_id):
     """
-    Applies operator entered by user to two last value of a given stack
+    Applies operator entered by user to two last values of a given stack
 
+    @param operator: post : Operator to be applied on two last operands of the stack
     @param stack_id: post : ID of the stack on which we add an operand or apply an operator
     @return: 201: an empty payload.
     """
@@ -175,6 +176,18 @@ def apply_operator(operator, stack_id):
     return '', 201
 
 
+@app.route("/rpn/clear_stack/<int:stack_id>", methods=['DELETE'])
+def clear_stack(stack_id):
+    """
+    Clears a stack, given a certain stack ID
+
+    @param stack_id: delete : ID of the stack that we want to delete
+    @return: 204: an empty payload.
+    """
+
+    STACKS[stack_id].clear()
+
+    return '', 204
 
 if __name__ == '__main__':
     obj_stack_count         = StackCount(0)
