@@ -42,7 +42,6 @@ def test_get_operators():
 
 Pipeline:
 - create stack
-- list stack
 - add operand
 - add operand
 - add operand
