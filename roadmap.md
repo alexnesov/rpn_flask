@@ -3,4 +3,4 @@ A solution would be to add session variable with Flasks built-in Session class, 
 - Not all functions are tested: a good idea would to add a Coverage functionnality for a production grade application.
 - A production grade application would require to split the main app.py script from other Flask blueprints, especially if the app grows with new functionnalities (such as new scientific operators for example) 
 - The app would require a WSGI in the case of an application grade deployment
-- Would be nice to have personalized error handlers to add more informative and more structures error messages as an HTTP response
+- Would be nice to have personalized error handlers to add more informative and more structured error messages as an HTTP response
