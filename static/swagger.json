@@ -1,0 +1,162 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "description": "alex_exalt",
+        "version": "1.0.0",
+        "title": "rpn_flask",
+        "contact": {
+            "email": "alex@financial-portfolio.io"
+        }
+    },
+    "components": {
+      "schemas": {
+        "stack_id": {
+          "type":"int"
+        },
+        "operand": {
+          "type":"str"
+        }
+      }
+    },
+    "servers": [
+      {
+        "url": "/"
+      }
+    ],
+    "tags": [
+        {
+          "name": "RPN Calculator",
+          "description": "API providing an RPN calculator through a Server(Flask)-Client architecture"
+        }
+      ],
+    "paths": {
+    "/rpn/op": {
+        "get": {
+          "tags": [
+            "List_operators"
+          ],
+          "summary": "Lists all the available operators",
+          "responses": {
+            "200": {
+              "description": "OK"
+            }
+          }
+        }
+    },
+    "/rpn/stack": {
+        "post": {
+          "tags": [
+            "Create_stack"
+          ],
+          "summary": "Create a stack",
+          "responses": {
+            "200": {
+              "description": "OK"
+            }
+          }
+        },
+        "get": {
+            "tags": [
+              "List_stacks"
+            ],
+            "summary": "List all the stacks",
+            "responses": {
+              "200": {
+                "description": "OK"
+              }
+            }
+          }  
+    },
+    "/rpn/stack/{stack_id}/val/{val}": {
+      "parameters": [
+          {
+            "name": "stack_id",
+            "in": "path",
+            "required": true,
+            "description": "unique identifier of the stack",
+            "type": "int"
+          },
+          {
+            "name": "val",
+            "in": "path",
+            "required": true,
+            "description": "unique identifier of the stack",
+            "type": "int"
+          }
+      ],
+    "post": {
+      "tags": [
+        "Push_to_stack"
+      ],
+      "summary": "Push a new value to a stack",
+      "responses": {
+        "200": {
+          "description": "OK"
+        }
+      }
+    }
+   },
+    "/rpn/stack/{stack_id}": {
+        "parameters": [
+            {
+              "name": "stack_id",
+              "in": "path",
+              "required": true,
+              "description": "unique identifier of the stack",
+              "type": "int"
+            }
+        ],
+        "get": {
+          "tags": [
+            "Get_stack"
+          ],
+          "summary": "Gets a stack",
+          "responses": {
+            "200": {
+              "description": "OK"
+            }
+          }
+        },
+        "delete": {
+            "tags": [
+              "Delete_stack"
+            ],
+            "summary": "Delete a stack",
+            "responses": {
+              "200": {
+                "description": "OK"
+              }
+            }
+          }
+    },
+    "/rpn/op/{op}/stack/{stack_id}": {
+        "parameters": [
+          {
+              "name": "stack_id",
+              "in": "path",
+              "required": true,
+              "description": "unique identifier of the stack",
+              "type": "int"
+            },
+            {
+              "name": "op",
+              "in": "path",
+              "required": true,
+              "description": "operation symbols ('+','-','*','/')",
+              "type": "string"
+            }
+        ],
+        "post": {
+          "tags": [
+            "Apply_operand"
+          ],
+          "summary": "Apply an operand to a stack",
+          "responses": {
+            "200": {
+              "description": "OK"
+            }
+          }
+        }
+    }
+}
+}
