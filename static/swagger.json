@@ -50,7 +50,7 @@
         ],
         "summary": "Create a stack",
         "responses": {
-          "200": {
+          "201": {
             "description": "OK"
           }
         }

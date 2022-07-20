@@ -96,7 +96,7 @@ def get_stack_list():
     """
     Lists existing stack(s) 
 
-    @return: 200: an array of existing stacks
+    @return: 200: an object representing the existing stacks and their content
     with application/json mimetype.
     """
     print('/rpn/stack get')
@@ -123,17 +123,17 @@ def create_stack():
 def push_val_to_stack(stack_id, val):
     """
     Adds a value to a stack, given a stack id
-    The stack_id is givent as an URL parameter
 
+    @param val: post : Operand - or "value" - to be added to the stack 
     @param stack_id: post : ID of the stack on which we add an operand or apply an operator
-    @param val: post : operand to be pushed to the stack
     @return: 201: an empty payload.
+    @raise 404: if stack_id not found
     """
 
     if stack_id in STACKS.keys():
         STACKS[stack_id].append(val)
     else:
-        print("Stack ID unknown")
+        abort(404)
 
     return '', 201
 
