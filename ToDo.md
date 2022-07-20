@@ -1,3 +1,3 @@
 - Didn't have time to handle the case where we try to execute an operand on an empty stack
 - Not all functions are tested
-- Not all JSON schemas were documented
+- Not all schemas were documented
