@@ -12,3 +12,8 @@ Note that you'll find some API specifications in <code>static/swagger.json</code
 # Testing the app
 
 To run the test you can type <code>pytest -v</code> from within the <code>tests</code> directory
+
+
+<br>
+
+<img src="https://github.com/alexnesov/rpn_flask/blob/main/rpn_screencap.png">
