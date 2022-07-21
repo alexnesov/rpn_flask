@@ -1,5 +1,5 @@
 - !! This is the most urgent thing to resolve: Currently the Stack IDs are generated as global variables, it is absolutely not thread safe. But for our prototype it's ok. The app works. It doesn't look useful to share such a variable across users. A solution would be to add session variable with Flasks built-in Session class. Even if we wanted unique ID's across user's it would still be problematic. A more fancy caching capability such as Redis would allow us to have unique IDs across the users.
 - Not all functions are tested: a good idea would to add a Coverage functionnality for a production grade application.
 - A production grade application would require to split the main app.py script from other Flask blueprints, especially if the app grows with new functionnalities (such as new scientific operators for example) 
-- The app would require a WSGI server in the case of an application grade deployment
+- The app would require a WSGI server in the case of a production grade deployment
 - Would be nice to have personalized error handlers to add more informative and more structured error messages as an HTTP response
